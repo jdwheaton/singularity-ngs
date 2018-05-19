@@ -4,7 +4,7 @@ From: centos:7
 %post
 	# Install required build tools
     yum -y update
-    yum -y install git autoconf gcc make wget unzip
+    yum -y install git autoconf gcc make wget unzip bzip2
     # Install htslib and samtools dependencies
     yum -y install zlib-devel bzip2-devel xz-devel ncurses-devel
     # Clone htslib and samtools from github
