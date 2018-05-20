@@ -1,0 +1,23 @@
+Bootstrap: docker
+From: centos:7
+
+%post
+	# Install required build tools
+    yum -y update
+    yum -y install wget unzip perl java epel-release
+    yum -y install python-pip
+    # Download FastQC
+    cd /
+    wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.7.zip
+    unzip fastqc_v0.11.7.zip
+    rm fastqc_v0.11.7.zip
+    chmod 0775 /FastQC/fastqc
+    # Download cutadapt
+    pip install cutadapt
+    # Download TrimGalore!
+    wget https://github.com/FelixKrueger/TrimGalore/archive/0.4.5.zip
+    unzip 0.4.5.zip
+    
+    
+%environment
+	export PATH=$PATH:/FastQC:/TrimGalore-0.4.5
