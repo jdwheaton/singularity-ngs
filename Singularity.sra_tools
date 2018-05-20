@@ -1,0 +1,14 @@
+Bootstrap: docker
+From: centos:7
+
+%post
+	# Install required build tools
+    yum -y update
+    yum -y install tar wget
+    cd /
+    wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.9.0/sratoolkit.2.9.0-centos_linux64.tar.gz
+    tar -xvzf sratoolkit.2.9.0-centos_linux64.tar.gz
+    rm sratoolkit.2.9.0-centos_linux64.tar.gz
+    
+%environment
+	export PATH=$PATH:/sratoolkit.2.9.0-centos_linux64/bin
