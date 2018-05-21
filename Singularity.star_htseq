@@ -1,0 +1,16 @@
+bootstrap: docker
+From: centos:7
+
+%post
+	yum -y update
+	yum -y install wget git gzip bzip2 gcc gcc-c++ make zlib-devel epel-release
+	yum -y install python-pip
+	cd /
+	wget https://github.com/alexdobin/STAR/archive/2.6.0a.tar.gz
+	tar -xzf 2.6.0a.tar.gz
+	cd STAR-2.6.0a/source
+	make
+	pip install HTSeq
+	
+%environment
+	export PATH=$PATH:/STAR-2.6.0a/source
