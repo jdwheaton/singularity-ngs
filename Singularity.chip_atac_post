@@ -1,0 +1,19 @@
+Bootstrap: docker
+From: centos:7
+
+%post
+	# Install required build tools
+    yum -y update
+    yum -y install wget gcc-c++ make zlib-devel
+    # We need java for Picard
+    yum -y install java-1.8.0-openjdk-devel
+    # Install the Picard 2.18.9 jar in root
+    wget https://github.com/broadinstitute/picard/releases/download/2.18.9/picard.jar
+    # Download bedtools 
+    wget https://github.com/arq5x/bedtools2/releases/download/v2.27.1/bedtools-2.27.1.tar.gz
+    tar -xvzf bedtools-2.27.1.tar.gz
+    cd bedtools2
+    make
+    
+%environment
+	export PATH=$PATH:/bedtools2/bin
