@@ -1,10 +1,13 @@
 Bootstrap: docker
 From: centos:7
 
+# This container holds Picard tools, bedtools2, and IGVTools necessary for post-processing
+# and visualization of ATAC-seq and ChIP-seq data.
+
 %post
 	# Install required build tools
     yum -y update
-    yum -y install wget gcc-c++ make zlib-devel
+    yum -y install wget gcc-c++ make zlib-devel unzip
     # We need java for Picard
     yum -y install java-1.8.0-openjdk-devel
     # Install the Picard 2.18.9 jar in root
@@ -14,6 +17,13 @@ From: centos:7
     tar -xvzf bedtools-2.27.1.tar.gz
     cd bedtools2
     make
+    # Install IGVtools
+    cd /
+    wget http://data.broadinstitute.org/igv/projects/downloads/2.3/igvtools_2.3.98.zip
+    unzip igvtools_2.3.98.zip
+    
     
 %environment
 	export PATH=$PATH:/bedtools2/bin
+	export PATH=$PATH:/IGVTools
+    
