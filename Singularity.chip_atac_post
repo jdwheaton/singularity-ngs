@@ -1,13 +1,14 @@
 Bootstrap: docker
 From: centos:7
 
-# This container holds Picard tools, bedtools2, and IGVTools necessary for post-processing
+# This container holds Picard tools, bedtools2, IGVTools, deeptools, MACS2, and subread necessary for post-processing
 # and visualization of ATAC-seq and ChIP-seq data.
 
 %post
 	# Install required build tools
     yum -y update
-    yum -y install wget gcc-c++ make zlib-devel unzip
+    yum -y install wget gcc-c++ make zlib-devel unzip epel-release
+    yum -y install curl-devel python-devel python-pip
     # We need java for Picard
     yum -y install java-1.8.0-openjdk-devel
     # Install the Picard 2.18.9 jar in root
@@ -21,9 +22,17 @@ From: centos:7
     cd /
     wget http://data.broadinstitute.org/igv/projects/downloads/2.3/igvtools_2.3.98.zip
     unzip igvtools_2.3.98.zip
+    # Install deeptools
+    pip install deeptools
+    # Install MACS2
+    pip install macs2
+    # Install subread
+    cd /
+    wget https://sourceforge.net/projects/subread/files/subread-1.6.2/subread-1.6.2-Linux-x86_64.tar.gz
+    tar -xvzf subread-1.6.2-Linux-x86_64.tar.gz
     
     
 %environment
 	export PATH=$PATH:/bedtools2/bin
 	export PATH=$PATH:/IGVTools
-    
+    export PATH=$PATH:/subread-1.6.2-Linux-x86_64/bin
