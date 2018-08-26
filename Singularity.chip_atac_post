@@ -35,11 +35,10 @@ From: centos:7
     cd /homer
     wget http://homer.ucsd.edu/homer/configureHomer.pl
     perl configureHomer.pl -install
-    perl /homer/.//configureHomer.pl -install mm10
-    perl /homer/.//configureHomer.pl -install hg38
-
+    
     
 %environment
 	export PATH=$PATH:/bedtools2/bin
 	export PATH=$PATH:/IGVTools
     export PATH=$PATH:/subread-1.6.2-Linux-x86_64/bin
+    export PATH=$PATH:/homer/bin
