@@ -35,6 +35,7 @@ From: centos:7
     cd /homer
     wget http://homer.ucsd.edu/homer/configureHomer.pl
     perl configureHomer.pl -install
+    perl /homer/.//configureHomer.pl -install mm10
     
     
 %environment
