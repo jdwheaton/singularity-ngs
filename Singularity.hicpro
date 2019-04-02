@@ -1,17 +1,11 @@
-BootStrap: debootstrap
-DistType "debian"
-MirrorURL: http://us.archive.ubuntu.com/ubuntu/
-OSVersion: xenial
+Bootstrap: docker
+From: ubuntu:xenial
 
 %labels
     AUTHOR Nicolas Servant
 
-%pre
-    apt-get update
-    apt-get install -y debootstrap
-
-
 %post
+    apt-get update
     apt-get install -y wget
     apt-get install -y gzip
     apt-get install -y bzip2
