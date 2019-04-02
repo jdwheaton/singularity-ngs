@@ -65,7 +65,7 @@ From: ubuntu:xenial
     cd $(echo HiC-Pro-$VERSION)
 
     # Edit the config-install.txt file to specify a SLURM cluster (this is the easiest solution short of forking the repo)
-    sed -i 's/CLUSTER_SYS.*/CLUSTER_SYS = "SLURM"/g' config-install.txt
+    sed -i 's/CLUSTER_SYS.*/CLUSTER_SYS = SLURM/g' config-install.txt
 
     make configure
     make install
